@@ -64,7 +64,6 @@ application
 
 kratos 把微服务中的 app 服务类型主要分为5类：interface、service、job、admin、task，，应用 cmd 目录负责程序的：启动、关闭、配置初始化等。
 
-
 app/user/下面的一级目录就是应用类型目录
 
 1. interface: 对外的 BFF 服务，接受来自用户的请求，比如暴露了 HTTP/gRPC 接口。
