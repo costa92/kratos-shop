@@ -25,8 +25,10 @@
 在 kratos 的 transport/http 包中，为我们提供了 http 的相关方法，我们今天就是通过 transport/http 包中的 http.ResponseEncoder 控制,该函数需要传入 EncodeResponseFunc
 
 在 transport/http/coder.go 文件中有下面两个方法: **DefaultResponseEncoder** 与 **DefaultErrorEncoder**
-**DefaultResponseEncoder**: 是否默认正常的返回格式
-**DefaultErrorEncoder**: 是否默认错误的返回格式
+
+1. **DefaultResponseEncoder**: 默认正常的返回格式
+
+2. **DefaultErrorEncoder**: 默认错误的返回格式
 
 ```go
 type DecodeRequestFunc func(*http.Request, interface{}) error
