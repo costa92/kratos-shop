@@ -83,10 +83,10 @@ app/user/下面的一级目录就是应用类型目录
 1. 往mono repo添加一个服务
 ```shell
 // 新建一个kratos服务
-kratos new app/demo/service --nomod
+kratos new app/user/service --nomod
 
 // 我们也可以将生成的服务指定到合适的服务类型目录下面，比如
-kratos new app/demo/interface --nomod
+kratos new app/user/interface --nomod
 ```
 
 2. 生成编译服务api proto文件
@@ -94,12 +94,12 @@ kratos new app/demo/interface --nomod
 // 生成
 kratos proto add api/demo/service/v1/demo.proto 
 // 编译
-kratos proto client api/demo/service/v1/demo.proto
+kratos proto client api/user/service/v1/demo.proto
 ```
 
 3. 生成service代码（也就是mvc中的controller）
 ```shell
-kratos proto server api/demo/service/v1/demo.proto -t app/demo/service/internal/service
+kratos proto server api/user/service/v1/demo.proto -t app/demo/service/internal/service
 ```
 
 # 参考文档:

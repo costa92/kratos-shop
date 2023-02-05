@@ -31,8 +31,9 @@ message DeleteDemoReply {}
 message GetDemoRequest {}
 
 message GetDemoReply {
-	int64 id = 1;
+	int32 id = 1 [json_name="id"];
 	string name = 2;
+	string user_nick=3 [json_name = "user_nick"];
 }
 
 message ListDemoRequest {}

@@ -158,3 +158,7 @@ func NewHTTPServer(c *conf.Server, user *service.DemoService, logger log.Logger)
 }
 
 ```
+
+# 参考文档:
+1. [自定义接口返回内容](https://czyt.tech/post/go-kratos-usage-memo/)
+2. [proto3 默认值，零值字段被忽略(issues)](https://github.com/go-kratos/kratos/issues/1952)

@@ -20,7 +20,7 @@ func NewDemoRepo(data *Data, logger log.Logger) biz.DemoRepo {
 	}
 }
 
-func (d DemoRepo) GetDemo(ctx context.Context, id int64) (*biz.Demo, error) {
+func (d DemoRepo) GetDemo(ctx context.Context, id int32) (*biz.Demo, error) {
 	return &biz.Demo{
 		Id:   id,
 		Name: "11",

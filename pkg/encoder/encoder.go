@@ -1,10 +1,12 @@
 package encoder
 
 import (
-	"encoding/json"
 	"fmt"
+	"github.com/go-kratos/kratos/v2/encoding"
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/transport/http"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/anypb"
 	nethttp "net/http"
 	"strings"
 )
@@ -55,29 +57,35 @@ func ErrorEncoder(w nethttp.ResponseWriter, r *nethttp.Request, err error) {
 	_, _ = w.Write(body)
 }
 
+type BaseResponse struct {
+	Code int32  `json:"code"`
+	Msg  string `json:"message"`
+}
+
 // responseEncoder encodes the object to the HTTP response.
-func ResponseEncoder(w http.ResponseWriter, r *http.Request, data interface{}) error {
-	type Response struct {
-		Code    int         `json:"code"`
-		Results interface{} `json:"results"`
-		Message string      `json:"message"`
+func ResponseEncoder(w nethttp.ResponseWriter, r *nethttp.Request, i interface{}) error {
+	reply := &Response{
+		Code: 200,
 	}
-	res := &Response{
-		Code:    200,
-		Results: data,
-		Message: "success",
+	if m, ok := i.(proto.Message); ok {
+		payload, err := anypb.New(m)
+		if err != nil {
+			return err
+		}
+		reply.Data = payload
 	}
-	msRes, err := json.Marshal(&res)
+
+	codec := encoding.GetCodec("json")
+	data, err := codec.Marshal(reply)
 	if err != nil {
 		return err
 	}
 	w.Header().Set("Content-Type", "application/json")
-	// w.WriteHeader(se.Code)
-	_, _ = w.Write(msRes)
+	w.Write(data)
 	return nil
 }
 
 // ContentType returns the content-type with base prefix.
-func ContentType(subtype string) string {
+func contentType(subtype string) string {
 	return strings.Join([]string{baseContentType, subtype}, "/")
 }

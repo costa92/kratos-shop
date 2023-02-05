@@ -44,6 +44,12 @@ api:
 	       --openapi_out=fq_schema_naming=true,default_response=false:. \
 	       $(API_PROTO_FILES)
 
+.PHONY: encoder
+# generate encoder proto
+encoder:
+	protoc --proto_path=. --go_out=. pkg/encoder/any.proto
+
+
 .PHONY: build
 # build
 build:

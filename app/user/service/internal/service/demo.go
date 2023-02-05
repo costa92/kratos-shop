@@ -28,13 +28,14 @@ func (s *DemoService) DeleteDemo(ctx context.Context, req *pb.DeleteDemoRequest)
 	return &pb.DeleteDemoReply{}, nil
 }
 func (s *DemoService) GetDemo(ctx context.Context, req *pb.GetDemoRequest) (*pb.GetDemoReply, error) {
-	res, err := s.dc.GetDemo(ctx, 0)
+	res, err := s.dc.GetDemo(ctx, 112)
 	if err != nil {
 		return nil, err
 	}
 	return &pb.GetDemoReply{
-		Id:   res.Id,
-		Name: res.Name,
+		Id:       res.Id,
+		Name:     res.Name,
+		UserNick: "111",
 	}, nil
 }
 func (s *DemoService) ListDemo(ctx context.Context, req *pb.ListDemoRequest) (*pb.ListDemoReply, error) {
